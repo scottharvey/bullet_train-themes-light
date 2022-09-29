@@ -9,19 +9,21 @@
 <% pagy ||= nil %>
 
 <div class="<%= "bg-white rounded-md shadow dark:bg-darkPrimary-700" unless no_background %> overflow-hidden <%= border_top ? "border-t dark:border-darkPrimary-500" : "" %>">
-  <div class="py-6 px-8 <%= title_padding %> space-y-2 <%= 'border-b shadow-sm dark:border-darkPrimary-600' if divider %>">
-    <% if p.content_for? :title %>
-      <h2 class="text-xl font-semibold dark:text-white <%= title_size %>">
-        <%= p.content_for :title %>
-      </h2>
-    <% end %>
+  <% if p.content_for?(:title) || p.content_for?(:description) %>
+    <div class="py-6 px-8 <%= title_padding %> space-y-2 <%= 'border-b shadow-sm dark:border-darkPrimary-600' if divider %>">
+      <% if p.content_for? :title %>
+        <h2 class="text-xl font-semibold dark:text-white <%= title_size %>">
+          <%= p.content_for :title %>
+        </h2>
+      <% end %>
 
-    <% if p.content_for? :description %>
-      <p class="text-gray-400 font-light leading-normal">
-        <%= p.content_for :description %>
-      </p>
-    <% end %>
-  </div>
+      <% if p.content_for? :description %>
+        <p class="text-gray-400 font-light leading-normal">
+          <%= p.content_for :description %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>  
 
   <div class="space-y-4">
     <% if p.content_for? :table %>
